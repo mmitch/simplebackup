@@ -1,0 +1,25 @@
+.\" $Id: simplebackup.in.1,v 1.1 2004-06-27 14:59:44 mitch Exp $
+.\" This manpage 2004 (C) by Christian Garbs <mitch@cgarbs.de>
+.\" Licensed under GNU GPL.
+.TH "simplebackup" "1" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
+.SH "NAME"
+.LP 
+\fBsimplebackup\fR \- do a simple backup of your data
+.SH "SYNOPSIS"
+\fBsimplebackup\fR [\fI\-h\fR] [\fIconffile\fR]
+.SH "DESCRIPTION"
+Simplebackup generates a .tar.gz archive of the paths specified in the configuration.  Additional data (like bootsectors, partiton layout, database dumps etc.) can be added to the archive by adding corresponding shell commands to the configuration file.
+.SH "OPTIONS"
+.TP 
+\fI\-h\fR
+Prints a simple help text.
+.TP 
+\fIconffile\fR
+The location of the configuration file to use.  If not specified, simplebackup will look in \fI~/.simplebackup.conf\fR.
+.SH "SEE ALSO"
+\fIsimplebackup.conf\fR(5),
+\fIexpirebackups\fR(1)
+.SH "AUTHOR"
+simplebackup was written by Christian Garbs <\fImitch@cgarbs.de\fR>.
+.SH "COPYRIGHT"
+simplebackup is licensed under GNU GPL.

@@ -1,0 +1,75 @@
+#!/bin/bash
+#
+# $Id: simplebackup,v 1.1 2004-06-27 14:59:44 mitch Exp $
+#
+# Simple backup script by Christian Garbs <mitch@cgarbs.de>
+# Licensed under GNU GPL.
+#
+
+# initial setup
+set -e
+export PATH=/usr/sbin:/usr/bin:/sbin:/bin
+RCFILE=~/.simplebackup.conf
+
+# help wanted?
+if [ "$1" = "-h" ]; then
+    echo "usage:"
+    echo -e "\t$0 [-h] [configuration_file]"
+    exit 0
+fi
+
+# other configuration file given?
+if [ "$1" ]; then
+    RCFILE="$1"
+fi
+
+# check permissions on configuration file
+if [ $(( 0$(stat -c %a "$RCFILE") & 0022 )) -gt 0 ] ; then
+    echo Configuration file is writeable by group or others.
+    echo As this file is executed under your userid, this is a
+    echo security risk.  A malicious user could add a command to
+    echo remove the contents of your home directory, for example.
+    echo Change the permissions to something like 600 or 644.
+    exit 2
+fi
+
+# more initialization
+source "$RCFILE"
+TARGET="$NAME"-$(LANG=C date +%Y%m%d)
+
+# init
+test -e "$LOCKFILE" && echo "another backup is already running" 1>&2 && exit 1
+echo $$ > "$LOCKFILE"
+renice $NICELEVEL $$
+
+# prepare temporary directory
+echo "setting up"
+rm -rf "$WORKDIR"
+mkdir -p "$WORKDIR"
+chown $UID "$WORKDIR"
+chmod 700 "$WORKDIR"
+
+# execute extra commands
+extracommands
+
+# backup files
+for PFAD in $PATHS; do
+    echo "backing up $PFAD"
+    mkdir -p "$WORKDIR$PFAD"
+    (cd "$PFAD" ; tar -c .) | (cd "$WORKDIR$PFAD" ; tar -x)
+done
+
+# build big archive
+echo "renaming working directory"
+cd "$TARGETDIR"
+rm -rf "$TARGETDIR/$TARGET"
+mv "$WORKDIR" "$TARGET"
+
+echo "building archive"
+tar -c "$TARGET" -jf "$TARGET.tar.bz2"
+chmod 400 "$TARGET.tar.bz2"
+rm -rf "$TARGET"
+
+echo "finished"
+rm "$LOCKFILE"
+exit 0

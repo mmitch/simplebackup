@@ -1,0 +1,47 @@
+#!/usr/bin/perl -w
+#
+# $Id: expirebackups,v 1.1 2004-06-27 14:59:44 mitch Exp $
+#
+# Finds old backups to be deleted.
+# Written by Christian Garbs <mitch@cgarbs.de>
+# Licensed under GNU GPL.
+#
+
+use strict;
+
+# parameter handling
+die "usage:\n\t$0 <backup_path>\n" unless @ARGV == 1;
+my ($backup_path) = @ARGV;
+
+# read file list
+my (%backup, @keep, @delete);
+opendir DIR, $backup_path or die "can't opendir() `$backup_path': $!\n";
+foreach ( grep { -f "$backup_path/$_" } readdir(DIR) ) {
+    if ( /^((.+)-(\d{4})(\d{2})(\d{2})\.tar\.bz2)$/ ) {
+	push @{$backup{$2}}, {
+	    'FILE'  => $1,
+	    'NAME'  => $2,
+	    'YEAR'  => $3,
+	    'MONTH' => $4,
+	    'DAY'   => $5,
+	    'AGE'   => ($3*12)+$4
+	};
+    }
+}
+closedir DIR or die "can't closedir() `$backup_path': $!\n";
+
+foreach my $file (keys %backup) {
+    my @backup = @{$backup{$file}};
+
+    # sort newest first
+    @backup = sort {$b->{AGE} <=> $a->{AGE}} @backup;
+    
+    # keep latest 4 entries
+    @keep = splice @backup, 0, 4;
+    
+    # sort oldest first
+    @backup = reverse @backup;
+    
+    # print file list
+    print "$_->{FILE}\n" foreach (@backup);
+}
