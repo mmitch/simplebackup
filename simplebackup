@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.4 2004-07-04 17:40:34 mitch Exp $
+# $Id: simplebackup,v 1.5 2004-07-05 20:07:58 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -52,14 +52,23 @@ chmod 700 "$WORKDIR"
 # execute extra commands
 extracommands
 
+# display chroot
+if [ "$CHROOT" ]; then
+    echo "chroot to `$CHROOT'"
+    if [ ! -d "$CHROOT" ]; then
+	echo "chroot path not found!"
+	exit 3
+    fi
+fi
+
 # backup files
 OLDIFS="$IFS"
 IFS=":"
 for PFAD in $BACKUPDIRS; do
-    if [ -d "$PFAD" ]; then
+    if [ -d "$CHROOT$PFAD" ]; then
 	echo "backing up $PFAD"
 	mkdir -p "$WORKDIR$PFAD"
-	(cd "$PFAD" ; tar -c .) | (cd "$WORKDIR$PFAD" ; tar -x)
+	(cd "$CHROOT$PFAD" ; tar -c .) | (cd "$WORKDIR$PFAD" ; tar -x)
     else
 	echo "$PFAD is no directory!"
     fi

@@ -1,4 +1,4 @@
-.\" $Id: simplebackup.conf.in.5,v 1.4 2004-06-28 19:11:37 mitch Exp $
+.\" $Id: simplebackup.conf.in.5,v 1.5 2004-07-05 20:07:58 mitch Exp $
 .\" This manpage 2004 (C) by Christian Garbs <mitch@cgarbs.de>
 .\" Licensed under GNU GPL.
 .TH "simplebackup.conf" "5" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
@@ -8,47 +8,55 @@
 .SH "DESCRIPTION"
 This file contains the configuration for the backups done by \fIsimplebackup\fR(1).
 .SH "SYNTAX"
-This file is a \fIbash\fR(1) shell script.  It is used to set some shell variables and a shell function that are used by the backup script.  Be careful in what you write here: the configuration file is sourced and all commands within are executed on the beginning of a backup.
+This file is a \fIbash\fR(1) shell script.  It is used to set some
+shell variables and a shell function that are used by the backup
+script.  Be careful in what you write here: the configuration file is
+sourced and all commands within are executed on the beginning of a
+backup.
 .SH "VARIABLES"
 .TP 
 \fITARGETDIR\fR
-This is the directory where the backup is written to.
-Be sure to have enough free disk space here.
+This is the directory where the backup is written to.  Be sure to have
+enough free disk space here.
 
 .TP 
 \fIWORKDIR\fR
-This is the directory where the backup is prepared.
-Disk space needed here is the sum of all data to be backed up.
-This directory will be deleted on startup, so don't point to
-anyting important.
+This is the directory where the backup is prepared.  Disk space needed
+here is the sum of all data to be backed up.  This directory will be
+deleted on startup, so don't point to anyting important.
 
 .TP 
 \fIBACKUPDIRS\fR
-These paths and their subdirectories are to be backed up.
-Use : to separate multiple paths.
+These paths and their subdirectories are to be backed up.  Use : to
+separate multiple paths.
 
 .TP 
 \fINAME\fR
-This is the name of the backup.  It is later prepended
-with a timestamp.
+This is the name of the backup.  It is later prepended with a
+timestamp.
 
 .TP 
 \fILOCKFILE\fR
-This lockfile is used to detect another running backup.
-You can run multiple different backups in parallel by
-using different lockfiles in different configurations.
+This lockfile is used to detect another running backup.  You can run
+multiple different backups in parallel by using different lockfiles in
+different configurations.
 
 .TP 
 \fINICELEVEL\fR
-Nice level to run with.
-20 is low priority, 0 is normal,
-\-20 is high priority (only root can do this).
+Nice level to run with.  20 is low priority, 0 is normal, \-20 is high
+priority (only root can do this).
+
+.TP
+\fICHROOT\fR
+Chroot path.  If you want to backup another system that is reachable
+via your filesystem, you have to point this variable to the other
+system's root directory.  Leave empty for normal operation.
 .SH "FUNCTIONS"
 .TP 
 \fIextracommands()\fR
-These commands are executed before the backup.
-Here you can dump databases, save your partition layout etc.
-Put additional files to be backed up into \fI$WORKDIR\fR or subdirectories thereof.
+These commands are executed before the backup.  Here you can dump
+databases, save your partition layout etc.  Put additional files to be
+backed up into \fI$WORKDIR\fR or subdirectories thereof.
 .SH "SEE ALSO"
 \fIsimplebackup\fR(1),
 \fIexpirebackups\fR(1)
