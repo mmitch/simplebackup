@@ -1,6 +1,6 @@
-# $Id: Makefile,v 1.3 2004-06-28 19:07:28 mitch Exp $
+# $Id: Makefile,v 1.4 2004-07-04 17:43:05 mitch Exp $
 
-VERSION=0.0.3
+VERSION=0.0.4
 NAME=simplebackup-$(VERSION)
 TAR=$(NAME).tar.gz
 
