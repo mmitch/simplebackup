@@ -1,0 +1,17 @@
+// $Id: HISTORY,v 1.1 2004-06-28 19:06:21 mitch Exp $ //
+
+HISTORY for simplebackup
+
+2004/06/28:  0.0.3
+------------------
+- rename $PATHS to $BACKUPDIRS
+- supress renice(1) output
+- print paths and filenames in expirebackups
+
+2004/06/27:  0.0.2
+------------------
+- change PATHS separator to :
+
+2004/06/27:  0.0.1
+------------------
+- first release
