@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.5 2004-07-05 20:07:58 mitch Exp $
+# $Id: simplebackup,v 1.6 2004-07-05 20:21:22 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -54,7 +54,7 @@ extracommands
 
 # display chroot
 if [ "$CHROOT" ]; then
-    echo "chroot to `$CHROOT'"
+    echo "chroot to $CHROOT"
     if [ ! -d "$CHROOT" ]; then
 	echo "chroot path not found!"
 	exit 3
