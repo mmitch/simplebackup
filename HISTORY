@@ -1,4 +1,4 @@
-// $Id: HISTORY,v 1.1 2004-06-28 19:06:21 mitch Exp $ //
+// $Id: HISTORY,v 1.2 2004-06-28 19:12:18 mitch Exp $ //
 
 HISTORY for simplebackup
 
@@ -7,10 +7,13 @@ HISTORY for simplebackup
 - rename $PATHS to $BACKUPDIRS
 - supress renice(1) output
 - print paths and filenames in expirebackups
+- remove bogus BUGS section from simplebackup.conf(5)
+
 
 2004/06/27:  0.0.2
 ------------------
 - change PATHS separator to :
+
 
 2004/06/27:  0.0.1
 ------------------
