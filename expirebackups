@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: expirebackups,v 1.1 2004-06-27 14:59:44 mitch Exp $
+# $Id: expirebackups,v 1.2 2004-06-28 19:04:43 mitch Exp $
 #
 # Finds old backups to be deleted.
 # Written by Christian Garbs <mitch@cgarbs.de>
@@ -12,6 +12,7 @@ use strict;
 # parameter handling
 die "usage:\n\t$0 <backup_path>\n" unless @ARGV == 1;
 my ($backup_path) = @ARGV;
+$backup_path =~ s:/+$::;
 
 # read file list
 my (%backup, @keep, @delete);
@@ -43,5 +44,5 @@ foreach my $file (keys %backup) {
     @backup = reverse @backup;
     
     # print file list
-    print "$_->{FILE}\n" foreach (@backup);
+    print "$backup_path/$_->{FILE}\n" foreach (@backup);
 }
