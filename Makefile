@@ -1,12 +1,12 @@
-# $Id: Makefile,v 1.2 2004-06-27 21:20:53 mitch Exp $
+# $Id: Makefile,v 1.3 2004-06-28 19:07:28 mitch Exp $
 
-VERSION=0.0.2
+VERSION=0.0.3
 NAME=simplebackup-$(VERSION)
 TAR=$(NAME).tar.gz
 
 SCRIPTS=expirebackups simplebackup
 MANPAGES=expirebackups.1 simplebackup.1 simplebackup.conf.5
-DOCS=README COPYING
+DOCS=README COPYING HISTORY
 EXAMPLES=simplebackup.conf
 FILES=$(SCRIPTS) $(MANPAGES) $(DOCS) $(EXAMPLES)
 
