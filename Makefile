@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2004-06-27 14:59:44 mitch Exp $
+# $Id: Makefile,v 1.1.1.1 2004-06-27 14:59:44 mitch Exp $
 
 VERSION=0.0.1
 NAME=simplebackup-$(VERSION)
