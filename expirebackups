@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: expirebackups,v 1.2 2004-06-28 19:04:43 mitch Exp $
+# $Id: expirebackups,v 1.3 2004-11-09 20:01:06 mitch Exp $
 #
 # Finds old backups to be deleted.
 # Written by Christian Garbs <mitch@cgarbs.de>
@@ -25,8 +25,8 @@ foreach ( grep { -f "$backup_path/$_" } readdir(DIR) ) {
 	    'YEAR'  => $3,
 	    'MONTH' => $4,
 	    'DAY'   => $5,
-	    'AGE'   => ($3*12)+$4
-	};
+	    'AGE'   => (($3*13)+$4)*32+$5
+	}
     }
 }
 closedir DIR or die "can't closedir() `$backup_path': $!\n";
