@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.4 2004-07-04 17:43:05 mitch Exp $
+# $Id: Makefile,v 1.5 2004-07-04 17:48:36 mitch Exp $
 
 VERSION=0.0.4
 NAME=simplebackup-$(VERSION)
@@ -16,7 +16,7 @@ clean:
 	rm -f $(MANPAGES)
 	rm -f *~
 
-dist:	all
+dist:	clean all
 	rm -rf $(NAME)
 	mkdir $(NAME)
 	cp $(FILES) $(NAME)
