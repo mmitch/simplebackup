@@ -1,6 +1,11 @@
-// $Id: HISTORY,v 1.4 2004-07-05 20:07:58 mitch Exp $ //
+// $Id: HISTORY,v 1.5 2004-11-09 20:10:03 mitch Exp $ //
 
 HISTORY for simplebackup
+
+
+2004/11/09:  0.0.6
+------------------
+- fix expirebackup sorting for more than one backup per month
 
 
 2004/07/05:  0.0.5
