@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.1 2004-06-27 14:59:44 mitch Exp $
+# $Id: simplebackup,v 1.2 2004-06-27 21:20:39 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -53,11 +53,14 @@ chmod 700 "$WORKDIR"
 extracommands
 
 # backup files
+OLDIFS="$IFS"
+IFS=":"
 for PFAD in $PATHS; do
     echo "backing up $PFAD"
     mkdir -p "$WORKDIR$PFAD"
     (cd "$PFAD" ; tar -c .) | (cd "$WORKDIR$PFAD" ; tar -x)
 done
+IFS="$OLDIFS"
 
 # build big archive
 echo "renaming working directory"
