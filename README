@@ -1,17 +1,7 @@
-// $Id: README,v 1.2 2004-06-27 21:26:01 mitch Exp $ //
+// $Id: README,v 1.3 2004-06-28 19:06:43 mitch Exp $ //
 
 Simple backup suite written by Christian Garbs <mitch@cgarbs.de>
 
 See simplebackup(1), simplebackup.conf(5) and expirebackups(1) for details.
 
 Homepage: http://www.cgarbs.de/stuff.en.html
-
-History:
-
-2004/06/27:  0.0.2
-------------------
-- change PATHS separator to :
-
-2004/06/27:  0.0.1
-------------------
-- first release
