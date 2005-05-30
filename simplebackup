@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.6 2004-07-05 20:21:22 mitch Exp $
+# $Id: simplebackup,v 1.7 2005-05-30 18:10:43 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -82,7 +82,7 @@ rm -rf "$TARGETDIR/$TARGET"
 mv "$WORKDIR" "$TARGET"
 
 echo "building archive"
-tar -c "$TARGET" -jf "$TARGET.tar.bz2"
+tar -cjf "$TARGET.tar.bz2" "$TARGET" 
 chmod 400 "$TARGET.tar.bz2"
 rm -rf "$TARGET"
 

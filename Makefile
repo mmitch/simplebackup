@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.7 2004-11-09 20:10:16 mitch Exp $
+# $Id: Makefile,v 1.8 2005-05-30 18:11:21 mitch Exp $
 
 VERSION=0.0.6
 NAME=simplebackup-$(VERSION)
@@ -20,7 +20,7 @@ dist:	clean all
 	rm -rf $(NAME)
 	mkdir $(NAME)
 	cp $(FILES) $(NAME)
-	tar -c $(NAME) -zvf $(TAR)
+	tar -czvf $(TAR) $(NAME)
 	rm -rf $(NAME)
 
 %.1: %.in.1
