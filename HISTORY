@@ -1,6 +1,11 @@
-// $Id: HISTORY,v 1.5 2004-11-09 20:10:03 mitch Exp $ //
+// $Id: HISTORY,v 1.6 2005-05-30 18:13:17 mitch Exp $ //
 
 HISTORY for simplebackup
+
+
+2005/05/30:  0.0.7
+------------------
+- fix problems with tar-1.15.1
 
 
 2004/11/09:  0.0.6
