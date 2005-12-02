@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.8 2005-12-02 18:57:00 mitch Exp $
+# $Id: simplebackup,v 1.9 2005-12-02 19:02:29 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -32,6 +32,9 @@ if [ $(( 0$(stat -c %a "$RCFILE") & 0022 )) -gt 0 ] ; then
     echo Change the permissions to something like 600 or 644.
     exit 2
 fi
+
+# set default values
+extracommands() { :; }
 
 # more initialization
 source "$RCFILE"
