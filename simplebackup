@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.10 2005-12-02 19:11:15 mitch Exp $
+# $Id: simplebackup,v 1.11 2005-12-02 19:17:44 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -40,6 +40,45 @@ postbackup() { :; }
 # more initialization
 source "$RCFILE"
 TARGET="$NAME"-$(LANG=C date +%Y%m%d)
+
+# check configuration
+if [ -z "$TARGETDIR" ] ; then
+    echo TARGETDIR is not set
+    exit 3
+else
+    if [ ! -d "$TARGETDIR" ] ; then
+	echo TARGETDIR is no directory
+	exit 3
+    fi
+fi
+
+if [ -z "$WORKDIR" ] ; then
+    echo WORKDIR is not set
+    exit 4
+else
+    if [ ! -d "$WORKDIR" ] ; then
+	echo WORKDIR is no directory
+	exit 4
+    fi
+fi
+
+if [ -z "$BACKUPDIRS" ] ; then
+    echo BACKUPDIRS is not set
+    exit 5
+fi
+
+if [ -z "NAME" ] ; then
+    echo NAME is not set
+    exit 6
+fi
+
+if [ -z "LOCKFILE" ] ; then
+    echo LOCKFILE is not set
+fi
+
+if [ -z "$NICELEVEL" ] ; then
+    NICELEVEL=0
+fi
 
 # init
 test -e "$LOCKFILE" && echo "another backup is already running" 1>&2 && exit 1
