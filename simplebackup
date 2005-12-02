@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.11 2005-12-02 19:17:44 mitch Exp $
+# $Id: simplebackup,v 1.12 2005-12-02 19:19:15 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -55,11 +55,6 @@ fi
 if [ -z "$WORKDIR" ] ; then
     echo WORKDIR is not set
     exit 4
-else
-    if [ ! -d "$WORKDIR" ] ; then
-	echo WORKDIR is no directory
-	exit 4
-    fi
 fi
 
 if [ -z "$BACKUPDIRS" ] ; then
