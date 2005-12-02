@@ -1,11 +1,12 @@
-// $Id: HISTORY,v 1.7 2005-12-02 19:11:15 mitch Exp $ //
+// $Id: HISTORY,v 1.8 2005-12-02 19:18:23 mitch Exp $ //
 
 HISTORY for simplebackup
 
-2005/xx/xx:  0.0.9
+2005/12/02:  0.0.8
 ------------------
 
 - provide postbackup() hook to execute commands after backup
+- check configuration
 - don't let extracommands() mess with our environment
 
 
