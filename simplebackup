@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.7 2005-05-30 18:10:43 mitch Exp $
+# $Id: simplebackup,v 1.8 2005-12-02 18:57:00 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -50,7 +50,9 @@ chown $UID "$WORKDIR"
 chmod 700 "$WORKDIR"
 
 # execute extra commands
-extracommands
+(
+    extracommands
+)
 
 # display chroot
 if [ "$CHROOT" ]; then
