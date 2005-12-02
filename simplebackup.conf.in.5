@@ -1,4 +1,4 @@
-.\" $Id: simplebackup.conf.in.5,v 1.5 2004-07-05 20:07:58 mitch Exp $
+.\" $Id: simplebackup.conf.in.5,v 1.6 2005-12-02 18:56:09 mitch Exp $
 .\" This manpage 2004 (C) by Christian Garbs <mitch@cgarbs.de>
 .\" Licensed under GNU GPL.
 .TH "simplebackup.conf" "5" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
@@ -57,6 +57,7 @@ system's root directory.  Leave empty for normal operation.
 These commands are executed before the backup.  Here you can dump
 databases, save your partition layout etc.  Put additional files to be
 backed up into \fI$WORKDIR\fR or subdirectories thereof.
+\fIextracommand()\fR is executed before entering a possible CHROOT.
 .SH "SEE ALSO"
 \fIsimplebackup\fR(1),
 \fIexpirebackups\fR(1)
