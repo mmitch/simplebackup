@@ -1,11 +1,13 @@
-// $Id: HISTORY,v 1.9 2006-07-30 16:25:32 mitch Exp $ //
+// $Id: HISTORY,v 1.10 2006-07-30 16:30:02 mitch Exp $ //
 
 HISTORY for simplebackup
 
 2006/07/30:  0.0.9
 ------------------
 - provide postcopy() hook to execute commands after copying, but
-  before taring
+  before archiving
+- fix error checking on $LOCKFILE and $NAME
+- work without $LOCKFILE, but warn about it
 
 
 2005/12/02:  0.0.8

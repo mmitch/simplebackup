@@ -1,11 +1,11 @@
-# $Id: testrc,v 1.1 2006-07-30 16:25:32 mitch Exp $
+# $Id: testrc,v 1.2 2006-07-30 16:30:02 mitch Exp $
 # Configuration file for simplebackup.
 
 #
 # This is the directory where the backup is written to.
 # Be sure to have enough free disk space here.
 #
-TARGETDIR=/backup
+TARGETDIR=/tmp/backup
 
 #
 # This is the directory where the backup is prepared.

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.13 2006-07-30 16:25:32 mitch Exp $
+# $Id: simplebackup,v 1.14 2006-07-30 16:30:02 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -63,13 +63,13 @@ if [ -z "$BACKUPDIRS" ] ; then
     exit 5
 fi
 
-if [ -z "NAME" ] ; then
+if [ -z "$NAME" ] ; then
     echo NAME is not set
     exit 6
 fi
 
-if [ -z "LOCKFILE" ] ; then
-    echo LOCKFILE is not set
+if [ -z "$LOCKFILE" ] ; then
+    echo warning: no LOCKFILE is given, multiple instances may run
 fi
 
 if [ -z "$NICELEVEL" ] ; then
@@ -77,8 +77,10 @@ if [ -z "$NICELEVEL" ] ; then
 fi
 
 # init
-test -e "$LOCKFILE" && echo "another backup is already running" 1>&2 && exit 1
-echo $$ > "$LOCKFILE"
+if [ "$LOCKFILE" ] ; then
+    [ -e "$LOCKFILE" ] && echo "another backup is already running" 1>&2 && exit 1
+    echo $$ > "$LOCKFILE"
+fi
 renice $NICELEVEL $$ > /dev/null
 
 # prepare temporary directory
@@ -140,5 +142,5 @@ export BACKUPFILE
 )
 
 echo "finished"
-rm "$LOCKFILE"
+[ "$LOCKFILE" ] && rm "$LOCKFILE"
 exit 0
