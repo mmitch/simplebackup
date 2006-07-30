@@ -1,6 +1,12 @@
-// $Id: HISTORY,v 1.8 2005-12-02 19:18:23 mitch Exp $ //
+// $Id: HISTORY,v 1.9 2006-07-30 16:25:32 mitch Exp $ //
 
 HISTORY for simplebackup
+
+2006/07/30:  0.0.9
+------------------
+- provide postcopy() hook to execute commands after copying, but
+  before taring
+
 
 2005/12/02:  0.0.8
 ------------------

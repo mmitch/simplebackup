@@ -1,0 +1,65 @@
+# $Id: testrc,v 1.1 2006-07-30 16:25:32 mitch Exp $
+# Configuration file for simplebackup.
+
+#
+# This is the directory where the backup is written to.
+# Be sure to have enough free disk space here.
+#
+TARGETDIR=/backup
+
+#
+# This is the directory where the backup is prepared.
+# Disk space needed here is the sum of all data to be backed up.
+# This directory will be deleted on startup, so don't point to
+# anyting important.
+#
+WORKDIR=$TARGETDIR/tmp
+
+#
+# These paths and their subdirectories are to be backed up.
+#
+BACKUPDIRS='/boot /etc /root /var/backups /var/games /var/lib/amavis-stats /var/lib/aptitude /var/lib/cvs /var/lib/mailman /var/lib/news /var/lib/ucf /var/lib/usemod-wiki /var/log /var/mail /var/spool/cron'
+
+#
+# This is the name of the backup.  It is later prepended
+# with a timestamp.
+#
+NAME=$(hostname)-testrc
+
+#
+# This lockfile is used to detect another running backup.
+# You can run multiple different backups in parallel by
+# using different lockfiles in different configurations.
+#
+#LOCKFILE=/var/run/backup_in_progress-"$NAME"
+
+#
+# Nice level to run with.
+# 20 is low priority, 0 is normal,
+# -20 is high priority (only root can do this).
+#
+NICELEVEL=20
+
+#
+# These commands are executed before the backup.
+# Here you can dump databases, save your partition layout etc.
+#
+extracommands()
+{
+    # system data
+    echo "extracting system data"
+    fdisk -l > "$WORKDIR"/output_fdisk_-l
+    lspci -v > "$WORKDIR"/output_lspci_-v
+    dpkg --get-selections > "$WORKDIR"/output_dpkg_--get-selections
+    dd if=/dev/hdb  of="$WORKDIR"/mbr_hdb.dd bs=512 count=1
+    dd if=/dev/hdc1 of="$WORKDIR"/bootsector_hdc1.dd bs=512 count=1
+
+    # databases
+    #echo "dumping databases"
+    #(
+    #    cd "$WORKDIR"
+    #    /root/aniki-tools/dumpit.sh
+    #    /root/forum-tools/dumpit.sh
+    #    /root/mysql-tools/dumpit.sh
+    #)
+}
