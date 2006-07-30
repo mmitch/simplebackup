@@ -1,4 +1,4 @@
-// $Id: HISTORY,v 1.10 2006-07-30 16:30:02 mitch Exp $ //
+// $Id: HISTORY,v 1.11 2006-07-30 16:35:36 mitch Exp $ //
 
 HISTORY for simplebackup
 
@@ -8,6 +8,7 @@ HISTORY for simplebackup
   before archiving
 - fix error checking on $LOCKFILE and $NAME
 - work without $LOCKFILE, but warn about it
+- fix error in example configuration (empty functions)
 
 
 2005/12/02:  0.0.8
