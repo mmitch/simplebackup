@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.14 2006-07-30 16:30:02 mitch Exp $
+# $Id: simplebackup,v 1.15 2007-05-13 07:49:38 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -86,9 +86,8 @@ renice $NICELEVEL $$ > /dev/null
 # prepare temporary directory
 echo "setting up"
 rm -rf "$WORKDIR"
-mkdir -p "$WORKDIR"
+mkdir -m 700 -p "$WORKDIR"
 chown $UID "$WORKDIR"
-chmod 700 "$WORKDIR"
 
 # execute extra commands
 (
@@ -131,8 +130,10 @@ mv "$WORKDIR" "$TARGET"
 
 echo "building archive"
 BACKUPFILE="$TARGET.tar.bz2"
-tar -cjf "$BACKUPFILE" "$TARGET" 
-chmod 400 "$BACKUPFILE"
+(
+    umask 0377
+    tar -cjf "$BACKUPFILE" "$TARGET"
+)
 rm -rf "$TARGET"
 
 # execute postbackup commands
