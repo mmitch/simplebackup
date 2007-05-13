@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.15 2007-05-13 07:49:38 mitch Exp $
+# $Id: simplebackup,v 1.16 2007-05-13 08:05:07 mitch Exp $
 #
 # Simple backup script by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
@@ -106,13 +106,13 @@ fi
 # backup files
 OLDIFS="$IFS"
 IFS=":"
-for PFAD in $BACKUPDIRS; do
-    if [ -d "$CHROOT$PFAD" ]; then
-	echo "backing up $PFAD"
-	mkdir -p "$WORKDIR$PFAD"
-	(cd "$CHROOT$PFAD" ; tar -c .) | (cd "$WORKDIR$PFAD" ; tar -x)
+for DIR in $BACKUPDIRS; do
+    if [ -d "$CHROOT$DIR" ]; then
+	echo "backing up $DIR"
+	mkdir -p "$WORKDIR$DIR"
+	(cd "$CHROOT$DIR" ; tar -c .) | (cd "$WORKDIR$DIR" ; tar -x)
     else
-	echo "$PFAD is no directory!"
+	echo "$DIR is no directory!"
     fi
 done
 IFS="$OLDIFS"
