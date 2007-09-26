@@ -1,4 +1,4 @@
-# $Id: testrc,v 1.2 2006-07-30 16:30:02 mitch Exp $
+# $Id: testrc,v 1.3 2007-09-26 18:03:20 mitch Exp $
 # Configuration file for simplebackup.
 
 #
@@ -18,7 +18,7 @@ WORKDIR=$TARGETDIR/tmp
 #
 # These paths and their subdirectories are to be backed up.
 #
-BACKUPDIRS='/boot /etc /root /var/backups /var/games /var/lib/amavis-stats /var/lib/aptitude /var/lib/cvs /var/lib/mailman /var/lib/news /var/lib/ucf /var/lib/usemod-wiki /var/log /var/mail /var/spool/cron'
+BACKUPDIRS='/boot:/etc:/root:/var/backups:/var/games:/var/lib/amavis-stats:/var/lib/aptitude:/var/lib/cvs:/var/lib/mailman:/var/lib/news:/var/lib/ucf:/var/lib/usemod-wiki:/var/log:/var/mail:/var/spool/cron'
 
 #
 # This is the name of the backup.  It is later prepended
