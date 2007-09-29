@@ -1,10 +1,10 @@
-// $Id: HISTORY,v 1.14 2007-09-26 18:03:54 mitch Exp $ //
+// $Id: HISTORY,v 1.15 2007-09-29 12:27:35 mitch Exp $ //
 
 HISTORY for simplebackup
 
 2007/xx/xx:  0.1.2
 ------------------
-- add dump of e2fs backup superblocks to example configuration file
+- add more examples to configuration file
 
 
 2007/05/13:  0.1.1
