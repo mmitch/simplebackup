@@ -1,7 +1,6 @@
-// $Id: README,v 1.5 2007-09-26 18:03:54 mitch Exp $ //
-
 Simple backup suite written by Christian Garbs <mitch@cgarbs.de>
 
 See simplebackup(1), simplebackup.conf(5) and expirebackups(1) for details.
 
 Homepage: http://www.cgarbs.de/stuff.en.html
+Source:   http://www.cgarbs.de/cgi-bin/gitweb.cgi/simplebackup.git

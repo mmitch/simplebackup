@@ -1,8 +1,8 @@
 #!/bin/bash
 #
-# $Id: simplebackup,v 1.16 2007-05-13 08:05:07 mitch Exp $
+# simplebackup - a simple backup script
 #
-# Simple backup script by Christian Garbs <mitch@cgarbs.de>
+# 2004-2008 (C) by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
 #
 
