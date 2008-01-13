@@ -1,9 +1,8 @@
 #!/usr/bin/perl -w
 #
-# expirebackups
+# expirebackups - find old backups to be deleted
 #
-# Finds old backups to be deleted.
-# Written by Christian Garbs <mitch@cgarbs.de>
+# 2004-2008 (C) by Christian Garbs <mitch@cgarbs.de>
 # Licensed under GNU GPL.
 #
 
