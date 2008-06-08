@@ -2,6 +2,7 @@ HISTORY for simplebackup
 
 2007/xx/xx:  0.1.2
 ------------------
+- add Debian firmware locations to configuration file
 - add more examples to configuration file
 
 
