@@ -96,6 +96,9 @@ fi
 if [ "$LOCKFILE" ] ; then
     [ -e "$LOCKFILE" ] && echo_err "another backup is already running" && exit 1
     echo $$ > "$LOCKFILE"
+    trap 'STATUS=$?; rm -f "$LOCKFILE"; exit $STATUS' ERR
+    trap 'echo_err "Received SIGTERM"; rm -f "$LOCKFILE"; exit 98' SIGTERM
+    trap 'echo_err "Received SIGINT"; rm -f "$LOCKFILE"; exit 99' SIGINT
 fi
 renice $NICELEVEL $$ > /dev/null
 
