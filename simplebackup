@@ -11,6 +11,22 @@ set -e
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
 RCFILE=~/.simplebackup.conf
 
+# helper functions
+echo_info() {
+    if [ "$SILENT" != "1" -a \
+         "$SILENT" != "true" ]; then
+        echo "$@"
+    fi
+}
+
+echo_warn() {
+    echo "$@"
+}
+
+echo_err() {
+    echo "$@" > /dev/stderr
+}
+
 # help wanted?
 if [ "$1" = "-h" ]; then
     echo "usage:"
@@ -25,11 +41,11 @@ fi
 
 # check permissions on configuration file
 if [ $(( 0$(stat -c %a "$RCFILE") & 0022 )) -gt 0 ] ; then
-    echo Configuration file is writeable by group or others.
-    echo As this file is executed under your userid, this is a
-    echo security risk.  A malicious user could add a command to
-    echo remove the contents of your home directory, for example.
-    echo Change the permissions to something like 600 or 644.
+    echo_err Configuration file is writeable by group or others.
+    echo_err As this file is executed under your userid, this is a
+    echo_err security risk.  A malicious user could add a command to
+    echo_err remove the contents of your home directory, for example.
+    echo_err Change the permissions to something like 600 or 644.
     exit 2
 fi
 
@@ -44,32 +60,32 @@ TARGET="$NAME"-$(LANG=C date +%Y%m%d)
 
 # check configuration
 if [ -z "$TARGETDIR" ] ; then
-    echo TARGETDIR is not set
+    echo_err TARGETDIR is not set
     exit 3
 else
     if [ ! -d "$TARGETDIR" ] ; then
-	echo TARGETDIR is no directory
+	echo_err TARGETDIR is no directory
 	exit 3
     fi
 fi
 
 if [ -z "$WORKDIR" ] ; then
-    echo WORKDIR is not set
+    echo_err WORKDIR is not set
     exit 4
 fi
 
 if [ -z "$BACKUPDIRS" ] ; then
-    echo BACKUPDIRS is not set
+    echo_err BACKUPDIRS is not set
     exit 5
 fi
 
 if [ -z "$NAME" ] ; then
-    echo NAME is not set
+    echo_err NAME is not set
     exit 6
 fi
 
 if [ -z "$LOCKFILE" ] ; then
-    echo warning: no LOCKFILE is given, multiple instances may run
+    echo_warn warning: no LOCKFILE is given, multiple instances may run
 fi
 
 if [ -z "$NICELEVEL" ] ; then
@@ -78,13 +94,13 @@ fi
 
 # init
 if [ "$LOCKFILE" ] ; then
-    [ -e "$LOCKFILE" ] && echo "another backup is already running" 1>&2 && exit 1
+    [ -e "$LOCKFILE" ] && echo_err "another backup is already running" && exit 1
     echo $$ > "$LOCKFILE"
 fi
 renice $NICELEVEL $$ > /dev/null
 
 # prepare temporary directory
-echo "setting up"
+echo_info "setting up"
 rm -rf "$WORKDIR"
 mkdir -m 700 -p "$WORKDIR"
 chown $UID "$WORKDIR"
@@ -96,9 +112,9 @@ chown $UID "$WORKDIR"
 
 # display chroot
 if [ "$CHROOT" ]; then
-    echo "chroot to $CHROOT"
+    echo_info "chroot to $CHROOT"
     if [ ! -d "$CHROOT" ]; then
-	echo "chroot path not found!"
+	echo_err "chroot path not found!"
 	exit 3
     fi
 fi
@@ -108,11 +124,11 @@ OLDIFS="$IFS"
 IFS=":"
 for DIR in $BACKUPDIRS; do
     if [ -d "$CHROOT$DIR" ]; then
-	echo "backing up $DIR"
+	echo_info "backing up $DIR"
 	mkdir -p "$WORKDIR$DIR"
 	(cd "$CHROOT$DIR" ; tar -c .) | (cd "$WORKDIR$DIR" ; tar -x)
     else
-	echo "$DIR is no directory!"
+	echo_err "$DIR is no directory!"
     fi
 done
 IFS="$OLDIFS"
@@ -123,12 +139,12 @@ IFS="$OLDIFS"
 )
 
 # build big archive
-echo "renaming working directory"
+echo_info "renaming working directory"
 cd "$TARGETDIR"
 rm -rf "$TARGETDIR/$TARGET"
 mv "$WORKDIR" "$TARGET"
 
-echo "building archive"
+echo_info "building archive"
 BACKUPFILE="$TARGET.tar.bz2"
 (
     umask 0377
@@ -142,6 +158,6 @@ export BACKUPFILE
     postbackup
 )
 
-echo "finished"
+echo_info "finished"
 [ "$LOCKFILE" ] && rm "$LOCKFILE"
 exit 0
