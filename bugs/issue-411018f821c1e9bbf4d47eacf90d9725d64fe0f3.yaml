@@ -3,7 +3,7 @@ title: add Debian firmware locations to configuration file
 desc: ""
 type: :feature
 component: simplebackup
-release: 
+release: 0.1.2
 reporter: Christian Garbs <mitch@cgarbs.de>
 status: :closed
 disposition: :fixed
@@ -19,4 +19,8 @@ log_events:
 - - 2009-01-30 19:36:11.681961 Z
   - Christian Garbs <mitch@cgarbs.de>
   - closed with disposition fixed
+  - ""
+- - 2009-01-30 19:48:52.499982 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - assigned to release 0.1.2 from unassigned
   - ""
