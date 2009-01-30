@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: trap errors and remove LOCKFILE on error
+desc: ""
+type: :feature
+component: simplebackup
+release: 
+reporter: Christian Garbs <mitch@cgarbs.de>
+status: :closed
+disposition: :fixed
+creation_time: 2009-01-30 19:39:55.752730 Z
+references: []
+
+id: af0aefc28eac858c479c5aca36c54222176287ff
+log_events: 
+- - 2009-01-30 19:39:57.292134 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - created
+  - ""
+- - 2009-01-30 19:40:03.807691 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - closed with disposition fixed
+  - ""

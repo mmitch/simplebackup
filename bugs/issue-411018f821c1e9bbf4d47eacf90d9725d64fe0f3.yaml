@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: add Debian firmware locations to configuration file
+desc: ""
+type: :feature
+component: simplebackup
+release: 
+reporter: Christian Garbs <mitch@cgarbs.de>
+status: :closed
+disposition: :fixed
+creation_time: 2009-01-30 19:36:02.214133 Z
+references: []
+
+id: 411018f821c1e9bbf4d47eacf90d9725d64fe0f3
+log_events: 
+- - 2009-01-30 19:36:03.081768 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - created
+  - ""
+- - 2009-01-30 19:36:11.681961 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - closed with disposition fixed
+  - ""
