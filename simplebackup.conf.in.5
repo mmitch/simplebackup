@@ -14,6 +14,10 @@ sourced and all commands within are executed on the beginning of a
 backup.
 .SH "VARIABLES"
 .TP 
+\fISILENT\fR
+If set to \fItrue\fR, simplebackup will print only errors and warnings.
+
+.TP 
 \fITARGETDIR\fR
 This is the directory where the backup is written to.  Be sure to have
 enough free disk space here.
@@ -45,7 +49,7 @@ different configurations.
 Nice level to run with.  20 is low priority, 0 is normal, \-20 is high
 priority (only root can do this).
 
-.TP
+.TP 
 \fICHROOT\fR
 Chroot path.  If you want to backup another system that is reachable
 via your filesystem, you have to point this variable to the other
