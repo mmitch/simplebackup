@@ -30,8 +30,14 @@ deleted on startup, so don't point to anyting important.
 
 .TP 
 \fIBACKUPDIRS\fR
-These paths and their subdirectories are to be backed up.  Use : to
-separate multiple paths.
+These paths and their subdirectories are to be backed up while
+crossing file system boundaries.  Use : to separate multiple paths.
+
+.TP 
+\fIBACKUPDIRS_ONEFS\fR
+These paths and their subdirectories are to be backed up.  No
+file system boundaries will be crossed.  Use : to separate multiple
+paths.
 
 .TP 
 \fINAME\fR
@@ -52,7 +58,7 @@ priority (only root can do this).
 .TP 
 \fICHROOT\fR
 Chroot path.  If you want to backup another system that is reachable
-via your filesystem, you have to point this variable to the other
+via your file system, you have to point this variable to the other
 system's root directory.  Leave empty for normal operation.
 .SH "FUNCTIONS"
 .TP 

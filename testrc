@@ -19,6 +19,8 @@ WORKDIR=$TARGETDIR/tmp
 #
 BACKUPDIRS='/boot:/etc:/root:/var/backups:/var/games:/var/lib/amavis-stats:/var/lib/aptitude:/var/lib/cvs:/var/lib/mailman:/var/lib/news:/var/lib/ucf:/var/lib/usemod-wiki:/var/log:/var/mail:/var/spool/cron'
 
+BACKUPDIRS_ONEFS='/dev'
+
 #
 # This is the name of the backup.  It is later prepended
 # with a timestamp.
