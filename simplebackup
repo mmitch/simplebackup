@@ -134,6 +134,15 @@ for DIR in $BACKUPDIRS; do
 	echo_err "$DIR is no directory!"
     fi
 done
+for DIR in $BACKUPDIRS_ONEFS; do
+    if [ -d "$CHROOT$DIR" ]; then
+	echo_info "backing up $DIR (one fs)"
+	mkdir -p "$WORKDIR$DIR"
+	(cd "$CHROOT$DIR" ; tar -c --one-file-system .) | (cd "$WORKDIR$DIR" ; tar -x)
+    else
+	echo_err "$DIR is no directory!"
+    fi
+done
 IFS="$OLDIFS"
 
 # execute extra commands after copying
