@@ -5,8 +5,8 @@ type: :bugfix
 component: simplebackup
 release: 0.1.3
 reporter: Christian Garbs <mitch@cgarbs.de>
-status: :unstarted
-disposition: 
+status: :closed
+disposition: :fixed
 creation_time: 2009-05-16 16:38:00.757092 Z
 references: []
 
@@ -15,4 +15,12 @@ log_events:
 - - 2009-05-16 16:38:01.648912 Z
   - Christian Garbs <mitch@cgarbs.de>
   - created
+  - ""
+- - 2009-05-16 16:53:50.013177 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - changed status from unstarted to in_progress
+  - ""
+- - 2009-05-16 17:01:16.154759 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - closed with disposition fixed
   - ""

@@ -50,6 +50,16 @@ if [ $(( 0$(stat -c %a "$RCFILE") & 0022 )) -gt 0 ] ; then
 fi
 
 # set default values
+unset SILENT
+unset TARGETDIR
+unset WORKDIR
+unset BACKUPDIRS
+unset BACKUPDIRS_ONEFS
+unset NAME
+unset LOCKFILE
+unset NICELEVEL
+unset CHROOT
+
 extracommands() { :; }
 postcopy() { :; }
 postbackup() { :; }
