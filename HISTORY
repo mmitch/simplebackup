@@ -1,5 +1,12 @@
 HISTORY for simplebackup
 
+== 0.1.3 / 2009-05-17
+* bugfix: sanitize configuration variables
+* bugfix: describe SILENT option in manpage
+* optionally don't cross filesystem borders (BACKUPDIRS_ONEFS)
+* example configuration: don't use sent-Folder with mutt
+
+
 == 0.1.2 / 2009-01-30
 * add SILENT option
 * add Debian firmware locations to configuration file
