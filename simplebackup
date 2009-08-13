@@ -97,8 +97,8 @@ if [ -z "$WORKDIR" ] ; then
     exit 4
 fi
 
-if [ -z "$BACKUPDIRS" ] ; then
-    echo_err BACKUPDIRS is not set
+if [ -z "${BACKUPDIRS}${BACKUPDIRS_ONEFS}" ] ; then
+    echo_err neither BACKUPDIRS nor BACKUPDIRS_ONEFS is set
     exit 5
 fi
 
