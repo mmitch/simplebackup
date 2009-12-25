@@ -1,0 +1,22 @@
+--- !ditz.rubyforge.org,2008-03-06/issue 
+title: "example configuration: add Cyrus paths to BACKUPDIR"
+desc: add /var/lib/cyrus and /var/spool/cyrus
+type: :feature
+component: simplebackup
+release: 
+reporter: Christian Garbs <mitch@cgarbs.de>
+status: :closed
+disposition: :fixed
+creation_time: 2009-12-25 21:58:03.400149 Z
+references: []
+
+id: 7be06cad101d4bb04e22bfd4dd21e7cfe620556e
+log_events: 
+- - 2009-12-25 21:58:06.926289 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - created
+  - ""
+- - 2009-12-25 21:58:28.825419 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - closed with disposition fixed
+  - ""
