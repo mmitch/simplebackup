@@ -3,4 +3,4 @@ Simple backup suite written by Christian Garbs <mitch@cgarbs.de>
 See simplebackup(1), simplebackup.conf(5) and expirebackups(1) for details.
 
 Homepage: http://www.cgarbs.de/stuff.en.html
-Source:   http://www.cgarbs.de/cgi-bin/gitweb.cgi/simplebackup.git
+Source:   http://github.com/mmitch/simplebackup
