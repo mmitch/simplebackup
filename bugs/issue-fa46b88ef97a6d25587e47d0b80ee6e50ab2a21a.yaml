@@ -3,7 +3,7 @@ title: support ACLs
 desc: check whether ACLs are backed up properly and if not, add the corresponding options to tar
 type: :bugfix
 component: simplebackup
-release: 0.1.5
+release: 
 reporter: Christian Garbs <mitch@cgarbs.de>
 status: :unstarted
 disposition: 
@@ -23,4 +23,8 @@ log_events:
 - - 2009-08-13 08:34:55.091204 Z
   - Christian Garbs <mitch@cgarbs.de>
   - assigned to release 0.1.5 from 0.1.4
+  - ""
+- - 2011-02-13 10:06:33.602608 Z
+  - Christian Garbs <mitch@cgarbs.de>
+  - unassigned from release 0.1.5
   - ""
