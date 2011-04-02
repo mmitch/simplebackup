@@ -1,5 +1,12 @@
 HISTORY for simplebackup
 
+== 0.1.5 / 2011-04-02
+* show general errors on script abort
+* example configuration:
+  - fix e2fs superblock backup
+  - add /var/lib/cyrus and /var/spool/cyrus to BACKUPDIRS
+
+
 == 0.1.4 / 2009-08-13
 * bugfix: check both BACKUPDIRS and BACKUPDIRS_ONEFS on startup
 * example configuration: add /var/spool/uptimed to BACKUPDIRS
