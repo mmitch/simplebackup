@@ -1,5 +1,10 @@
 HISTORY for simplebackup
 
+== 0.1.6 / 2011-04-10
+* example configuration:
+  - fix mutt invocation
+
+
 == 0.1.5 / 2011-04-02
 * show general errors on script abort
 * example configuration:
