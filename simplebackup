@@ -26,8 +26,7 @@ RCFILE=~/.simplebackup.conf
 
 # helper functions
 echo_info() {
-    if [ "$SILENT" != "1" ] && \
-       [ "$SILENT" != "true" ]; then
+    if [ "$SILENT" != "1" ] && [ "$SILENT" != "true" ]; then
         echo "$@"
     fi
 }
@@ -38,6 +37,32 @@ echo_warn() {
 
 echo_err() {
     echo "$@" > /dev/stderr
+}
+
+_dirstats() {
+    if [ "$DIRSTATS" != "1" ] && [ "$DIRSTATS" != "true" ]; then
+	return
+    fi
+
+    local DIR="$1" DU_FLAG="$2" FIND_FLAG="$3"
+
+    local SIZE
+    SIZE="$(du $DU_FLAG -BM -d0 "$DIR")"
+    SIZE="${SIZE%M*}M"
+
+    local FILES DIRS
+    FILES="$(find "$DIR" $FIND_FLAG -type f | wc -l)"
+    DIRS="$( find "$DIR" $FIND_FLAG -type d | wc -l)"
+
+    echo " ($SIZE in $DIRS dirs with $FILES files)"
+}
+
+dirstats() {
+    _dirstats "$1" '' ''
+}
+
+dirstats_onefs() {
+    _dirstats "$1" '-x' '-mount'
 }
 
 # help wanted?
@@ -150,7 +175,7 @@ OLDIFS="$IFS"
 IFS=":"
 for DIR in $BACKUPDIRS; do
     if [ -d "$CHROOT$DIR" ]; then
-	echo_info "backing up $DIR"
+	echo_info "backing up $DIR$(dirstats "$CHROOT$DIR")"
 	mkdir -p "$WORKDIR$DIR"
 	(cd "$CHROOT$DIR" ; tar -c .) | (cd "$WORKDIR$DIR" ; tar -x)
     else
@@ -159,7 +184,7 @@ for DIR in $BACKUPDIRS; do
 done
 for DIR in $BACKUPDIRS_ONEFS; do
     if [ -d "$CHROOT$DIR" ]; then
-	echo_info "backing up $DIR (one fs)"
+	echo_info "backing up $DIR (one fs)$(dirstats_onefs "$CHROOT$DIR")"
 	mkdir -p "$WORKDIR$DIR"
 	(cd "$CHROOT$DIR" ; tar -c --one-file-system .) | (cd "$WORKDIR$DIR" ; tar -x)
     else
@@ -179,7 +204,7 @@ cd "$TARGETDIR"
 rm -rf "$TARGETDIR/${TARGET:?TARGET can\'t be empty}"
 mv "$WORKDIR" "$TARGET"
 
-echo_info "building archive"
+echo_info "building archive$(dirstats "$TARGET")"
 BACKUPFILE="$TARGET.tar.bz2"
 (
     umask 0377

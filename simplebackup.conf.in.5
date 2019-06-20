@@ -1,5 +1,5 @@
 .\" Manpage simplebackup.conf(5)
-.\" Copyright (C) 2004,2005,2006,2007,2008,2009  Christian Garbs <mitch@cgarbs.de>
+.\" Copyright (C) 2004-2009,2019  Christian Garbs <mitch@cgarbs.de>
 .\" Licensed under GNU GPL v2 or later
 .TH "simplebackup.conf" "5" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
 .SH "NAME"
@@ -17,6 +17,12 @@ backup.
 .TP 
 \fISILENT\fR
 If set to \fItrue\fR, simplebackup will print only errors and warnings.
+
+.TP 
+\fIDIRSTATS\fR
+If set to \fItrue\fR, simeplebackup will print statistics for every
+directory backed up.  This needs \fIfind\fR(1), \fIdu\fR(1) and
+\fIwc\fR(1).
 
 .TP 
 \fITARGETDIR\fR
