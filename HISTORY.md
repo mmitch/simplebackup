@@ -1,6 +1,18 @@
 HISTORY for simplebackup
 ------------------------
 
+## 0.2.0 / 2019-06-24
+* add DIRSTATS option to show statistics about processed directories
+* example configuration:
+    - fix e2fs superblock dumping
+    - better code to backup mbr and bootsectors
+    - add dumping of table descriptions to mysqldump call
+    - backup RAID information
+    - backup harddisk serial numbers
+    - backup LVM configuration
+    - add /var/lib/apt to BACKUPDIRS
+    - remove apt package lists from backup
+
 ## 0.1.6 / 2011-04-10
 * example configuration:
     - fix mutt invocation

@@ -1,4 +1,4 @@
-VERSION=0.1.6+git
+VERSION=0.2.0
 NAME=simplebackup-$(VERSION)
 TAR=$(NAME).tar.gz
 
