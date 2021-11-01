@@ -1,6 +1,15 @@
 HISTORY for simplebackup
 ------------------------
 
+## 0.3.0 / 2021-11-01
+* allow selection of different archive and compression utilities
+* example configuration:
+    - document archive and compression utility selection
+    - generate sha256 checksums
+	- add /var/lib/mailman3 to BACKUPDIRS
+	- automatically determine MySQL/MariaDB databases to dump
+	- fix table locking with MySQL/MariaDB
+
 ## 0.2.0 / 2019-06-24
 * add DIRSTATS option to show statistics about processed directories
 * example configuration:
