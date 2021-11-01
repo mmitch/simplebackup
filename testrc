@@ -52,8 +52,8 @@ extracommands()
     fdisk -l > "$WORKDIR"/output_fdisk_-l
     lspci -v > "$WORKDIR"/output_lspci_-v
     dpkg --get-selections > "$WORKDIR"/output_dpkg_--get-selections
-    dd if=/dev/hdb  of="$WORKDIR"/mbr_hdb.dd bs=512 count=1
-    dd if=/dev/hdc1 of="$WORKDIR"/bootsector_hdc1.dd bs=512 count=1
+    dd if=/dev/sdb  of="$WORKDIR"/mbr_sdb.dd bs=512 count=1
+    dd if=/dev/sdc1 of="$WORKDIR"/bootsector_sdc1.dd bs=512 count=1
 
     # databases
     #echo "dumping databases"
