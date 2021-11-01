@@ -2,7 +2,7 @@
 #
 # simplebackup - a simple backup script
 #
-# Copyright (C) 2004-2009,2011,2019  Christian Garbs <mitch@cgarbs.de>
+# Copyright (C) 2004-2009,2011,2019,2021  Christian Garbs <mitch@cgarbs.de>
 # licensed under GNU GPL v2 or later
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -23,6 +23,14 @@
 set -e
 export PATH=/usr/sbin:/usr/bin:/sbin:/bin
 RCFILE=~/.simplebackup.conf
+
+# these defaults can be overridden in the $RCFILE
+BACKUP_EXTENSION=tar.bz2
+
+archive_and_compress() {
+    tar -cjf "$BACKUPFILE" "$TARGET"
+}
+
 
 # helper functions
 echo_info() {
@@ -205,10 +213,10 @@ rm -rf "$TARGETDIR/${TARGET:?TARGET can\'t be empty}"
 mv "$WORKDIR" "$TARGET"
 
 echo_info "building archive$(dirstats "$TARGET")"
-BACKUPFILE="$TARGET.tar.bz2"
+BACKUPFILE="$TARGET.$BACKUP_EXTENSION"
 (
     umask 0377
-    tar -cjf "$BACKUPFILE" "$TARGET"
+    archive_and_compress
 )
 rm -rf "$TARGET"
 
