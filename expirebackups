@@ -1,8 +1,8 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 #
 # expirebackups - find old backups to be deleted
 #
-# Copyright (C) 2004,2006,2007,2008,2011  Christian Garbs <mitch@cgarbs.de>
+# Copyright (C) 2004,2006-2008,2011,2022  Christian Garbs <mitch@cgarbs.de>
 # licensed under GNU GPL v2 or later
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,22 +20,35 @@
 #
 
 use strict;
+use warnings;
+
+sub print_help {
+    die "usage:\t$0 [keep_this_many] <backup_path> [extension]\n";
+}
 
 # parameter handling
-die "usage:\n\t$0 [keep_this_many] <backup_path>\n" unless (@ARGV == 1 or @ARGV == 2);
+print_help() unless @ARGV;
+
 my $keep_count = 4;
-if (@ARGV == 2) {
-    $keep_count = shift @ARGV;
-    die "[keep_this_many] may only contain digits!\n" if ($keep_count =~ y/0-9//c);
-}
-my ($backup_path) = @ARGV;
+$keep_count = shift @ARGV if ($ARGV[0] =~ /^\d+$/);
+
+my $backup_path = shift @ARGV;
 $backup_path =~ s:/+$::;
+die "backup path `$backup_path' is no directory\n" unless -d $backup_path;
+
+my $extension = '.tar.bz2';
+if (@ARGV) {
+    $extension = shift @ARGV;
+    die "extension `$extension' must start with a dot\n" unless substr($extension, 0, 1) eq '.';
+}
+
+print_help if @ARGV;
 
 # read file list
 my (%backup, @keep, @delete);
 opendir DIR, $backup_path or die "can't opendir() `$backup_path': $!\n";
-foreach ( grep { -f "$backup_path/$_" } readdir(DIR) ) {
-    if ( /^((.+)-(\d{4})(\d{2})(\d{2})\.tar\.bz2)$/ ) {
+foreach (grep { -f "$backup_path/$_" } readdir(DIR)) {
+    if ( /^((.+)-(\d{4})(\d{2})(\d{2})$extension)$/ ) {
 	push @{$backup{$2}}, {
 	    'FILE'  => $1,
 	    'NAME'  => $2,
