@@ -221,7 +221,6 @@ rm -rf "$TARGET"
 rmdir "$PARENT_WORKDIR"
 
 # execute postbackup commands
-export BACKUPFILE
 (
     postbackup
 )
