@@ -2,7 +2,7 @@
 #
 # simplebackup - a simple backup script
 #
-# Copyright (C) 2004-2009,2011,2019,2021  Christian Garbs <mitch@cgarbs.de>
+# Copyright (C) 2004-2009,2011,2019,2021,2022  Christian Garbs <mitch@cgarbs.de>
 # licensed under GNU GPL v2 or later
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -160,9 +160,11 @@ renice $NICELEVEL $$ > /dev/null
 
 # prepare temporary directory
 echo_info "setting up"
-rm -rf "$WORKDIR"
-mkdir -m 700 -p "$WORKDIR"
-chown $UID "$WORKDIR"
+PARENT_WORKDIR="$WORKDIR"
+WORKDIR="$WORKDIR/$TARGET"
+rm -rf "$PARENT_WORKDIR"
+mkdir -m 700 -p "$PARENT_WORKDIR" "$WORKDIR"
+chown $UID "$PARENT_WORKDIR" "$WORKDIR"
 
 # execute extra commands
 (
@@ -174,6 +176,7 @@ if [ "$CHROOT" ]; then
     echo_info "chroot to $CHROOT"
     if [ ! -d "$CHROOT" ]; then
 	echo_err "chroot path not found!"
+
 	exit 3
     fi
 fi
@@ -207,18 +210,15 @@ IFS="$OLDIFS"
 )
 
 # build big archive
-echo_info "renaming working directory"
-cd "$TARGETDIR"
-rm -rf "$TARGETDIR/${TARGET:?TARGET can\'t be empty}"
-mv "$WORKDIR" "$TARGET"
-
+cd "$WORKDIR/.."
 echo_info "building archive$(dirstats "$TARGET")"
-BACKUPFILE="$TARGET.$BACKUP_EXTENSION"
+BACKUPFILE="$TARGETDIR/$TARGET.$BACKUP_EXTENSION"
 (
     umask 0377
     archive_and_compress
 )
 rm -rf "$TARGET"
+rmdir "$PARENT_WORKDIR"
 
 # execute postbackup commands
 export BACKUPFILE

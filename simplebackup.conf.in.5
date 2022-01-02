@@ -1,5 +1,5 @@
 .\" Manpage simplebackup.conf(5)
-.\" Copyright (C) 2004-2009,2019  Christian Garbs <mitch@cgarbs.de>
+.\" Copyright (C) 2004-2009,2019,2021  Christian Garbs <mitch@cgarbs.de>
 .\" Licensed under GNU GPL v2 or later
 .TH "simplebackup.conf" "5" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
 .SH "NAME"
@@ -34,6 +34,12 @@ enough free disk space here.
 This is the directory where the backup is prepared.  Disk space needed
 here is the sum of all data to be backed up.  This directory will be
 deleted on startup, so don't point to anyting important.
+
+\fBNote: \fI$WORKDIR\fR will be expanded with an additional
+subdirectory consisting of \fI$NAME\fR and the current timestamp.  Be
+sure to use the \fI$WORKDIR\fR variable in your \fIextracommands()\fR,
+\fIpostcopy()\fR and \fIpostbackup()\fR functions instead of
+hardcoding the value you set here.
 
 .TP 
 \fIBACKUPDIRS\fR
