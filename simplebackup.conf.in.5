@@ -1,100 +1,82 @@
 .\" Manpage simplebackup.conf(5)
-.\" Copyright (C) 2004-2009,2019,2021  Christian Garbs <mitch@cgarbs.de>
+.\" Copyright (C) 2004-2009,2019,2021-2022  Christian Garbs <mitch@cgarbs.de>
 .\" Licensed under GNU GPL v2 or later
 .TH "simplebackup.conf" "5" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
 .SH "NAME"
 .LP 
-\fBsimplebackup.conf\fR \- configuration file for \fIsimplebackup\fR(1)
+\fBsimplebackup.conf\fR \- configuration file for \fBsimplebackup\fR(1)
 .SH "DESCRIPTION"
-This file contains the configuration for the backups done by \fIsimplebackup\fR(1).
+This file contains the configuration for the backups done by \fBsimplebackup\fR(1).
 .SH "SYNTAX"
-This file is a \fIbash\fR(1) shell script.  It is used to set some
-shell variables and a shell function that are used by the backup
-script.  Be careful in what you write here: the configuration file is
-sourced and all commands within are executed on the beginning of a
-backup.
+This file is a \fIbash\fR(1) shell script.
+It is used to set some shell variables and a shell function that are used by the backup script.
+Be careful in what you write here: the configuration file is sourced and all commands within are executed on the beginning of a backup.
 .SH "VARIABLES"
 .TP 
-\fISILENT\fR
+.I SILENT
 If set to \fItrue\fR, simplebackup will print only errors and warnings.
-
 .TP 
-\fIDIRSTATS\fR
-If set to \fItrue\fR, simeplebackup will print statistics for every
-directory backed up.  This needs \fIfind\fR(1), \fIdu\fR(1) and
-\fIwc\fR(1).
-
+.I DIRSTATS
+If set to \fItrue\fR, simeplebackup will print statistics for every directory backed up.
+This needs \fBfind\fR(1), \fBdu\fR(1) and \fBwc\fR(1).
 .TP 
-\fITARGETDIR\fR
-This is the directory where the backup is written to.  Be sure to have
-enough free disk space here.
-
+.I TARGETDIR
+This is the directory where the backup is written to.
+Be sure to have enough free disk space here.
 .TP 
-\fIWORKDIR\fR
-This is the directory where the backup is prepared.  Disk space needed
-here is the sum of all data to be backed up.  This directory will be
-deleted on startup, so don't point to anyting important.
-
-\fBNote: \fI$WORKDIR\fR will be expanded with an additional
-subdirectory consisting of \fI$NAME\fR and the current timestamp.  Be
-sure to use the \fI$WORKDIR\fR variable in your \fIextracommands()\fR,
-\fIpostcopy()\fR and \fIpostbackup()\fR functions instead of
-hardcoding the value you set here.
-
+.I WORKDIR
+This is the directory where the backup is prepared.
+Disk space needed here is the sum of all data to be backed up.
+This directory will be deleted on startup, so don't point to anything important.
+.IP
+.B Note:
+\fI$WORKDIR\fR will be expanded with an additional subdirectory consisting of \fI$NAME\fR and the current timestamp.
+Be sure to use the \fI$WORKDIR\fR variable in your \fIextracommands()\fR, \fIpostcopy()\fR and \fIpostbackup()\fR functions instead of hardcoding the value you set here.
 .TP 
-\fIBACKUPDIRS\fR
-These paths and their subdirectories are to be backed up while
-crossing file system boundaries.  Use : to separate multiple paths.
-
+.I BACKUPDIRS
+These paths and their subdirectories are to be backed up while crossing file system boundaries.
+Use \fI:\fR to separate multiple paths.
 .TP 
-\fIBACKUPDIRS_ONEFS\fR
-These paths and their subdirectories are to be backed up.  No
-file system boundaries will be crossed.  Use : to separate multiple
-paths.
-
+.I BACKUPDIRS_ONEFS
+These paths and their subdirectories are to be backed up.
+No file system boundaries will be crossed.
+Use \fI:\fR to separate multiple paths.
 .TP 
-\fINAME\fR
-This is the name of the backup.  It is later prepended with a
-timestamp.
-
+.I NAME
+This is the name of the backup.
+A timestamp will be added to it.
 .TP 
-\fILOCKFILE\fR
-This lockfile is used to detect another running backup.  You can run
-multiple different backups in parallel by using different lockfiles in
-different configurations.
-
+.I LOCKFILE
+This lockfile is used to detect another running backup.
+You can run multiple different backups in parallel by using different lockfiles in different configurations.
 .TP 
-\fINICELEVEL\fR
-Nice level to run with.  20 is low priority, 0 is normal, \-20 is high
-priority (only root can do this).
-
+.I NICELEVEL
+Nice level to run with, see \fBnice\fR(1).
+\fI19\fR is low priority, \fI0\fR is normal, \fI\-20\fR is high priority (this needs special capabilities, eg. root).
 .TP 
-\fICHROOT\fR
-Chroot path.  If you want to backup another system that is reachable
-via your file system, you have to point this variable to the other
-system's root directory.  Leave empty for normal operation.
+.I CHROOT
+Chroot path.
+If you want to backup another system that is reachable via your file system, you have to point this variable to the other system's root directory.
+Leave empty for normal operation.
 .SH "FUNCTIONS"
 .TP 
-\fIextracommands()\fR
-These commands are executed before the backup.  Here you can dump
-databases, save your partition layout etc.  Put additional files to be
-backed up into \fI$WORKDIR\fR or subdirectories thereof.
+.I extracommands()
+These commands are executed before the backup.
+Here you can dump databases, save your partition layout etc.
+Put additional files to be backed up into \fI$WORKDIR\fR or subdirectories thereof.
 \fIextracommand()\fR is executed before entering a possible \fI$CHROOT\fR.
-
 .TP 
-\fIpostcopy()\fR
-These commands are executed after copying all files into the
-\fI$WORKDIR\fR, but before putting them into the backup archive.  If
-some files need to be excluded from the \fI$BACKUPDIRS\fR then delete
-them here.  \fIpostcopy()\fR is executed outside a possible \fI$CHROOT\fR.
-
+.I postcopy()
+These commands are executed after copying all files into the \fI$WORKDIR\fR, but before putting them into the backup archive.
+If some files need to be excluded from the \fI$BACKUPDIRS\fR then delete them here.
+\fIpostcopy()\fR is executed outside a possible \fI$CHROOT\fR.
 .TP 
-\fIpostbackup()\fR
-These commands are executed after the backup.  The new backup filename
-is available as $BACKUPFILE.
+.I postbackup()
+These commands are executed after the backup.
+The new backup filename is available as \fI$BACKUPFILE\fR.
 .SH "SEE ALSO"
-\fIsimplebackup\fR(1),
-\fIexpirebackups\fR(1)
+.IR simplebackup (1),
+.IR expirebackups (1)
 .SH "AUTHOR"
 simplebackup was written by Christian Garbs <\fImitch@cgarbs.de\fR>.
 .SH "COPYRIGHT"
