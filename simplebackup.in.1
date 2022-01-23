@@ -4,11 +4,16 @@
 .TH "simplebackup" "1" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
 .SH "NAME"
 .LP 
-\fBsimplebackup\fR \- do a simple backup of your data
+.B simplebackup
+\- do a simple backup of your data
 .SH "SYNOPSIS"
-\fBsimplebackup\fR [\fI\-h\fR] [\fIconffile\fR]
+.B simplebackup
+.RI [ \-h ]
+.RI [ conffile ]
 .SH "DESCRIPTION"
-Simplebackup generates a .tar.bz2 archive of the paths specified in the configuration.
+Simplebackup generates an archive (
+.B .tar.bz2
+by default) of the paths specified in the configuration.
 Additional data (like bootsectors, partiton layout, database dumps etc.) can be added to the archive by adding corresponding shell commands to the configuration file.
 .SH "OPTIONS"
 .TP 
@@ -17,11 +22,13 @@ Prints a simple help text.
 .TP 
 .I conffile
 The location of the configuration file to use.
-If not specified, simplebackup will look in \fI~/.simplebackup.conf\fR.
+If not specified, simplebackup will look in
+.BR ~/.simplebackup.conf .
 .SH "SEE ALSO"
-.IR simplebackup.conf (5),
-.IR expirebackups (1)
+.BR simplebackup.conf (5),
+.BR expirebackups (1)
 .SH "AUTHOR"
-simplebackup was written by Christian Garbs <\fImitch@cgarbs.de\fR>.
+simplebackup was written by Christian Garbs
+.RI \< mitch@cgarbs.de >.
 .SH "COPYRIGHT"
 simplebackup is licensed under GNU GPL v2 or later

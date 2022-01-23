@@ -4,21 +4,34 @@
 .TH "simplebackup.conf" "5" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
 .SH "NAME"
 .LP 
-\fBsimplebackup.conf\fR \- configuration file for \fBsimplebackup\fR(1)
+.B simplebackup.conf
+\- configuration file for
+.BR simplebackup (1)
 .SH "DESCRIPTION"
-This file contains the configuration for the backups done by \fBsimplebackup\fR(1).
+This file contains the configuration for the backups done by
+.BR simplebackup (1).
 .SH "SYNTAX"
-This file is a \fIbash\fR(1) shell script.
+This file is a
+.BR bash (1)
+shell script.
 It is used to set some shell variables and a shell function that are used by the backup script.
 Be careful in what you write here: the configuration file is sourced and all commands within are executed on the beginning of a backup.
 .SH "VARIABLES"
 .TP 
 .I SILENT
-If set to \fItrue\fR, simplebackup will print only errors and warnings.
+If set to
+.BR true ,
+simplebackup will print only errors and warnings.
 .TP 
 .I DIRSTATS
-If set to \fItrue\fR, simeplebackup will print statistics for every directory backed up.
-This needs \fBfind\fR(1), \fBdu\fR(1) and \fBwc\fR(1).
+If set to
+.BR true ,
+simeplebackup will print statistics for every directory backed up.
+This needs
+.BR find (1),
+.BR du (1)
+and
+.BR wc (1).
 .TP 
 .I TARGETDIR
 This is the directory where the backup is written to.
@@ -30,29 +43,51 @@ Disk space needed here is the sum of all data to be backed up.
 This directory will be deleted on startup, so don't point to anything important.
 .IP
 .B Note:
-\fI$WORKDIR\fR will be expanded with an additional subdirectory consisting of \fI$NAME\fR and the current timestamp.
-Be sure to use the \fI$WORKDIR\fR variable in your \fIextracommands()\fR, \fIpostcopy()\fR and \fIpostbackup()\fR functions instead of hardcoding the value you set here.
+The
+.B $WORKDIR
+set in the configuration file will be supplemented with an additional subdirectory consisting of
+.B $NAME
+and the current timestamp.
+Be sure to use the
+.B $WORKDIR
+variable in your
+.IR extracommands() ,
+.I postcopy()
+and
+.I postbackup()
+functions instead of hardcoding the original value.
 .TP 
 .I BACKUPDIRS
 These paths and their subdirectories are to be backed up while crossing file system boundaries.
-Use \fI:\fR to separate multiple paths.
+Use
+.B :
+to separate multiple paths.
 .TP 
 .I BACKUPDIRS_ONEFS
 These paths and their subdirectories are to be backed up.
 No file system boundaries will be crossed.
-Use \fI:\fR to separate multiple paths.
+Use
+.B :
+to separate multiple paths.
 .TP 
 .I NAME
 This is the name of the backup.
-A timestamp will be added to it.
+It will be supplemented by a date timestamp in format
+.BR YYYYMMDD .
 .TP 
 .I LOCKFILE
 This lockfile is used to detect another running backup.
-You can run multiple different backups in parallel by using different lockfiles in different configurations.
+You can run multiple different backups in parallel by using different lockfiles in different configuration files.
 .TP 
 .I NICELEVEL
-Nice level to run with, see \fBnice\fR(1).
-\fI19\fR is low priority, \fI0\fR is normal, \fI\-20\fR is high priority (this needs special capabilities, eg. root).
+Nice level to run with, see
+.BR nice (1).
+.B 19
+is low priority,
+.B 0
+is normal,
+.B -20
+is high priority (this needs special capabilities, eg. root).
 .TP 
 .I CHROOT
 Chroot path.
@@ -63,21 +98,33 @@ Leave empty for normal operation.
 .I extracommands()
 These commands are executed before the backup.
 Here you can dump databases, save your partition layout etc.
-Put additional files to be backed up into \fI$WORKDIR\fR or subdirectories thereof.
-\fIextracommand()\fR is executed before entering a possible \fI$CHROOT\fR.
+Put additional files to be backed up into
+.B $WORKDIR
+or subdirectories thereof.
+.I extracommands()
+is executed before entering a possible
+.BR $CHROOT .
 .TP 
 .I postcopy()
-These commands are executed after copying all files into the \fI$WORKDIR\fR, but before putting them into the backup archive.
-If some files need to be excluded from the \fI$BACKUPDIRS\fR then delete them here.
-\fIpostcopy()\fR is executed outside a possible \fI$CHROOT\fR.
+These commands are executed after copying all files into the
+.BR $WORKDIR ,
+but before putting them into the backup archive.
+If some files need to be excluded from the
+.B $BACKUPDIRS
+then delete them here.
+.I postcopy()
+is executed outside a possible
+.BR $CHROOT .
 .TP 
 .I postbackup()
 These commands are executed after the backup.
-The new backup filename is available as \fI$BACKUPFILE\fR.
+The new backup filename is available in
+.BR $BACKUPFILE .
 .SH "SEE ALSO"
-.IR simplebackup (1),
-.IR expirebackups (1)
+.BR simplebackup (1),
+.BR expirebackups (1)
 .SH "AUTHOR"
-simplebackup was written by Christian Garbs <\fImitch@cgarbs.de\fR>.
+simplebackup was written by Christian Garbs
+.RI < mitch@cgarbs.de >.
 .SH "COPYRIGHT"
 simplebackup is licensed under GNU GPL v2 or later
