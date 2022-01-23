@@ -1,6 +1,22 @@
 HISTORY for simplebackup
 ------------------------
 
+## 1.0.0 / 2022-01-23
+* Don't move $WORKDIR to $TARGETDIR but create the archive from a
+  subdirectory of $WORKDIR instead.  This skips an unneccessary
+  full copy if $WORKDIR and $TARGETDIR are on different filesystems.
+  Also the free space needed on $TARGETDIR is reduced.
+
+  !! Because of the additional subdirectory involved, $WORKDIR will  
+  !! not be the original value that you have set in your  
+  !! configuration.  This might be incompatible if your configuration  
+  !! does not use the $WORKDIR variable but hardcoded paths.  Please  
+  !! check your scripts!
+
+* expirebackups(1) can scan different file extensions which is useful
+  if you use alternative archive formats as introduced in v0.3.0.
+  The default is .tar.bz2 like before.
+
 ## 0.3.0 / 2021-11-01
 * allow selection of different archive and compression utilities
 * example configuration:
