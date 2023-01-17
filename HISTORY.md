@@ -1,6 +1,11 @@
 HISTORY for simplebackup
 ------------------------
 
+## 1.0.1 / 2023-01-17
+* include example systemd service and timer units
+* example configuration:
+    - expire old backups using expirebackups
+
 ## 1.0.0 / 2022-01-23
 * Don't move $WORKDIR to $TARGETDIR but create the archive from a
   subdirectory of $WORKDIR instead.  This skips an unneccessary
