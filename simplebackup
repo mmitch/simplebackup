@@ -2,7 +2,7 @@
 #
 # simplebackup - a simple backup script
 #
-# Copyright (C) 2004-2009,2011,2019,2021,2022  Christian Garbs <mitch@cgarbs.de>
+# Copyright (C) 2004-2009,2011,2019,2021,2022,2023  Christian Garbs <mitch@cgarbs.de>
 # licensed under GNU GPL v2 or later
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -44,7 +44,7 @@ echo_warn() {
 }
 
 echo_err() {
-    echo "$@" > /dev/stderr
+    echo "$@" >&2
 }
 
 _dirstats() {
