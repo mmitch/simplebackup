@@ -1,0 +1,10 @@
+[Unit]
+Description=timer for simplebackup
+Requires=simplebackup.service
+
+[Timer]
+Unit=simplebackup.service
+OnCalendar=Sun *-*-* 03:00:00
+
+[Install]
+WantedBy=timers.target
