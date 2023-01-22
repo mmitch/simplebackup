@@ -8,7 +8,6 @@ ExecStart=/usr/bin/simplebackup /etc/simplebackup.conf
 
 IOSchedulingPriority=6
 CPUSchedulingPolicy=batch
-CPUQuota=90%
 Nice=16
 
 [Install]
