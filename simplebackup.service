@@ -1,5 +1,6 @@
 [Unit]
-Description=simplebackup
+Description=Create a simple system backup
+Documentation=man:simplebackup(1) man:simplebackup.conf(5)
 Wants=simplebackup.timer
 
 [Service]
