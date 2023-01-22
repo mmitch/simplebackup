@@ -1,0 +1,16 @@
+[Unit]
+Description=Create a simple backup for user %I
+Documentation=man:simplebackup(1) man:simplebackup.conf(5)
+Wants=simplebackup@%i.timer
+
+[Service]
+User=%i
+Type=oneshot
+ExecStart=/usr/bin/simplebackup
+
+IOSchedulingPriority=6
+CPUSchedulingPolicy=batch
+Nice=16
+
+[Install]
+WantedBy=multi-user.target
