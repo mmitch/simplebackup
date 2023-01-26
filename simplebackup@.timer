@@ -5,7 +5,7 @@ Requires=simplebackup@%i.service
 
 [Timer]
 Unit=simplebackup@%i.service
-OnCalendar=Sat *-*-* 02:00:00
+OnCalendar=Sat *-*-* 03:10:00
 RandomizedDelaySec=3 hour
 FixedRandomDelay=true
 

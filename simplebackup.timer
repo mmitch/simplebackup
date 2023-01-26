@@ -5,7 +5,7 @@ Requires=simplebackup.service
 
 [Timer]
 Unit=simplebackup.service
-OnCalendar=Sun *-*-* 03:00:00
+OnCalendar=Sun *-*-* 03:10:00
 
 [Install]
 WantedBy=timers.target
