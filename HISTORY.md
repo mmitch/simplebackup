@@ -1,5 +1,10 @@
 # HISTORY for simplebackup
 
+## 1.0.2 / 2023-01-26
+
+* update systemd service and timer units
+  * add templates for user-specific instances
+
 ## 1.0.1 / 2023-01-17
 
 * include example systemd service and timer units
