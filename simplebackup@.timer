@@ -1,11 +1,11 @@
 [Unit]
 Description=Create a simple backup for user %I every week
 Documentation=man:simplebackup(1) man:simplebackup.conf(5)
-Requires=simplebackup@%i.service
 
 [Timer]
 Unit=simplebackup@%i.service
 OnCalendar=Sat *-*-* 03:10:00
+Persistent=true
 RandomizedDelaySec=3 hour
 FixedRandomDelay=true
 

@@ -1,11 +1,11 @@
 [Unit]
 Description=Create a simple system backup every week
 Documentation=man:simplebackup(1) man:simplebackup.conf(5)
-Requires=simplebackup.service
 
 [Timer]
 Unit=simplebackup.service
 OnCalendar=Sun *-*-* 03:10:00
+Persistent=true
 
 [Install]
 WantedBy=timers.target
