@@ -1,5 +1,9 @@
 # HISTORY for simplebackup
 
+## 1.0.3 / 2023-01-26
+
+* include missing files in distribution tarball
+
 ## 1.0.2 / 2023-01-26
 
 * update systemd service and timer units
