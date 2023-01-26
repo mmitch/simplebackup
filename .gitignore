@@ -1,1 +1,6 @@
+# ignore backup files
 *~
+
+# ignore generated manpage
+*.1
+*.5
