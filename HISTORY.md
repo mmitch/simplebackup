@@ -1,5 +1,11 @@
 # HISTORY for simplebackup
 
+## 1.0.4 / 2023-01-27
+
+* tune timings in systemd units
+  * don't run on every reboot, only when a scheduled time was missed
+  * don't clash with DST time changes
+
 ## 1.0.3 / 2023-01-26
 
 * include missing files in distribution tarball
