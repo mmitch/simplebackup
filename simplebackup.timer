@@ -1,5 +1,5 @@
 [Unit]
-Description=Create a simple system backup every week
+Description=Create a simple backup every week
 Documentation=man:simplebackup(1) man:simplebackup.conf(5)
 
 [Timer]

@@ -1,5 +1,5 @@
 .\" Manpage simplebackup(1)
-.\" Copyright (C) 2004-2005,2007-2009,2022  Christian Garbs <mitch@cgarbs.de>
+.\" Copyright (C) 2004-2005,2007-2009,2022,2023  Christian Garbs <mitch@cgarbs.de>
 .\" Licensed under GNU GPL v2 or later
 .TH "simplebackup" "1" "%%%VERSION%%%" "Christian Garbs" "simple backup suite"
 .SH "NAME"
@@ -9,6 +9,7 @@
 .SH "SYNOPSIS"
 .B simplebackup
 .RI [ \-h ]
+.RI [ \-\-default\-to\-etc\-config\-if\-root ]
 .RI [ conffile ]
 .SH "DESCRIPTION"
 Simplebackup generates an archive (
@@ -20,10 +21,18 @@ Additional data (like bootsectors, partiton layout, database dumps etc.) can be 
 .I -h
 Prints a simple help text.
 .TP 
+.I \-\-default\-config\-to\-etc\-if\-root
+Changes the default location of the configuration file to
+.B /etc/simplebackup.conf
+when the user calling simplebackup is the root user (UID 0).
+.TP
 .I conffile
 The location of the configuration file to use.
 If not specified, simplebackup will look in
-.BR ~/.simplebackup.conf .
+.BR ~/.simplebackup.conf ,
+unless
+.I \-\-default\-config\-to\-etc\-if\-root
+is given.
 .SH "SEE ALSO"
 .BR simplebackup.conf (5),
 .BR expirebackups (1)

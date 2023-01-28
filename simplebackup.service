@@ -1,10 +1,10 @@
 [Unit]
-Description=Create a simple system backup
+Description=Create a simple backup
 Documentation=man:simplebackup(1) man:simplebackup.conf(5)
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/simplebackup /etc/simplebackup.conf
+ExecStart=/usr/bin/simplebackup --default-config-to-etc-if-root
 
 IOSchedulingPriority=6
 CPUSchedulingPolicy=batch

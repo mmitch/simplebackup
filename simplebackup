@@ -76,8 +76,16 @@ dirstats_onefs() {
 # help wanted?
 if [ "$1" = "-h" ]; then
     echo "usage:"
-    echo -e "\t$0 [-h] [configuration_file]"
+    echo -e "\t$0 [-h] [--default-config-to-etc-if-root] [configuration_file]"
     exit 0
+fi
+
+# change default configuration file location if root?
+if [ "$1" = "--default-config-to-etc-if-root" ]; then
+    if [ "$UID" = 0 ]; then
+	RCFILE=/etc/simplebackup.conf
+    fi
+    shift
 fi
 
 # other configuration file given?
