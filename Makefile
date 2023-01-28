@@ -5,7 +5,7 @@ TAR=$(NAME).tar.gz
 SCRIPTS=expirebackups simplebackup
 MANPAGES=expirebackups.1 simplebackup.1 simplebackup.conf.5
 DOCS=README COPYING HISTORY.md
-EXAMPLES=simplebackup.conf simplebackup.service simplebackup.timer simplebackup@.service simplebackup@.timer
+EXAMPLES=simplebackup.conf simplebackup.service simplebackup.timer
 FILES=$(SCRIPTS) $(MANPAGES) $(DOCS) $(EXAMPLES)
 
 all: $(MANPAGES)
