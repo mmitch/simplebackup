@@ -17,9 +17,10 @@ WORKDIR=$TARGETDIR/tmp
 #
 # These paths and their subdirectories are to be backed up.
 #
-BACKUPDIRS='/boot:/etc:/root:/var/backups:/var/games:/var/lib/amavis-stats:/var/lib/aptitude:/var/lib/cvs:/var/lib/mailman:/var/lib/news:/var/lib/ucf:/var/lib/usemod-wiki:/var/log:/var/mail:/var/spool/cron'
+BACKUPDIRS='/boot/grub'
+# BACKUPDIRS='/boot:/etc:/root:/var/backups:/var/games:/var/lib/amavis-stats:/var/lib/aptitude:/var/lib/cvs:/var/lib/mailman:/var/lib/news:/var/lib/ucf:/var/lib/usemod-wiki:/var/log:/var/mail:/var/spool/cron'
 
-BACKUPDIRS_ONEFS='/dev'
+#BACKUPDIRS_ONEFS='/dev'
 
 #
 # This is the name of the backup.  It is later prepended
@@ -52,8 +53,8 @@ extracommands()
     fdisk -l > "$WORKDIR"/output_fdisk_-l
     lspci -v > "$WORKDIR"/output_lspci_-v
     dpkg --get-selections > "$WORKDIR"/output_dpkg_--get-selections
-    dd if=/dev/sdb  of="$WORKDIR"/mbr_sdb.dd bs=512 count=1
-    dd if=/dev/sdc1 of="$WORKDIR"/bootsector_sdc1.dd bs=512 count=1
+    #dd if=/dev/sdb  of="$WORKDIR"/mbr_sdb.dd bs=512 count=1
+    #dd if=/dev/sdc1 of="$WORKDIR"/bootsector_sdc1.dd bs=512 count=1
 
     # databases
     #echo "dumping databases"
@@ -63,4 +64,38 @@ extracommands()
     #    /root/forum-tools/dumpit.sh
     #    /root/mysql-tools/dumpit.sh
     #)
+}
+
+postbackup()
+{
+    # echo generating checksum
+    # sha256sum -b "$BACKUPFILE" > "$BACKUPFILE".sha256
+
+    # echo mailing disk space left
+    # df -h "$TARGETDIR" | mail -s "backup finished" root
+
+    # !! You might want to encrypt your backup before sending it over
+    # !! untrusted networks (e.g. email or UUCP).
+
+    # echo mailing new archive
+    # mutt -e 'set record=/dev/null' -s "backup finished on $(hostname)" -a "$BACKUPFILE" -a "$BACKUPFILE".sha256-- root < /dev/null
+
+    # echo sending new archive via UUCP
+    # uucp -t -C -n someuser "$BACKUPFILE"        'somesystem!someuser'
+    # uucp -t -C -n someuser "$BACKUPFILE".sha256 'somesystem!someuser'
+
+    # echo scopying new archive
+    # scp "$BACKUPFILE" "$BACKUPFILE".sha256 backupuser@somehost:/some/dir
+
+    # expire older backups
+    # keep only the 4 latest backups (4 is the default from expirebackups)
+    to_expire=$(expirebackups "$TARGETDIR" ."$BACKUP_EXTENSION" | wc -l)
+    if [ "$to_expire" = 0 ]; then
+	echo "no older backups to expire"
+    else
+	echo "expiring older backups:"
+	expirebackups "$TARGETDIR" ."$BACKUP_EXTENSION" | while read -r backup; do rm -v "$backup"; done
+    fi
+
+    : # empty functions don't work
 }
