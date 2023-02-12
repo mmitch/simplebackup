@@ -1,5 +1,13 @@
 # HISTORY for simplebackup
 
+## 1.1.0 / 2023-02-12
+
+* add option --default-to-etc-config-if-root
+  * allows systemd unit to use /etc/simplebackup.conf for system-wide
+    backup and ~/.simplebackup.conf for user-specific backups
+* remove templated systemd units
+  * user-specific instances can already be created from the plain units
+
 ## 1.0.4 / 2023-01-27
 
 * tune timings in systemd units
