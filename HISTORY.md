@@ -1,5 +1,11 @@
 # HISTORY for simplebackup
 
+## unreleased
+
+* add TAR_OPTIONS to the example configuration
+  * this is a universally good thing and you should manually add
+    it to your existing configurations as well
+
 ## 1.1.0 / 2023-02-12
 
 * add option --default-to-etc-config-if-root
